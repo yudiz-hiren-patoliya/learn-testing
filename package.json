@@ -1,0 +1,24 @@
+{
+  "name": "learn-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "function.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yudiz-hiren-patoliya/learn-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yudiz-hiren-patoliya/learn-testing/issues"
+  },
+  "homepage": "https://github.com/yudiz-hiren-patoliya/learn-testing#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
