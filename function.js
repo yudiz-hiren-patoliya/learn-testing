@@ -2,6 +2,7 @@ const cube = {}
 
 cube.getCubesideLength = (length) => {
     return length
+    
 }
 
 cube.getCubesurfaceArea = () => {
