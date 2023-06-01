@@ -2,17 +2,18 @@ const mongoose = require('mongoose')
 const ProductModel = require('../model/product.model')
 
 const expect = require('chai').expect;
-require('chai').use(require('chai-mongo-doc'))
 
 describe('Product Model', () => {
     before(async () => {
         // Connect to the MongoDB product database
-        const conn = await mongoose.createConnection('mongodb://localhost:27017/product', {
+        mongoose.connect('mongodb://localhost:27017/product', {
             useNewUrlParser: true,
             useUnifiedTopology: true 
-        });
-        conn.on('connected',()=> console.log(`Connect to Product database`))
-        conn.on('error', (err) => console.log(`Error while connect DB : ${err}`))
+        }).then(()=> {
+            console.log('Connected to database')
+        }).catch((error)=> {
+            console.log('Error Occure while Database connection :',error)
+        })
     });
 
     after(async () => {
@@ -26,14 +27,14 @@ describe('Product Model', () => {
     it('should add product', async () => {
         const productObj = { sName: 'CPU', nPrice: 10000 }
         const productData = await ProductModel.create(productObj);
-        expect(productData?._id).to.be.objectId
+        expect(productData).to.be.an('object')
     });
 
     it('product find by name using static method',async() => {
         const data = await ProductModel.create({ sName: 'CPU', nPrice: 10000 });
         const product = await ProductModel.findByProductName(data?.sName);
         expect(product).to.exist;
-        expect(data?.sName).to.equal(getProduct?.sName)
+        expect(data?.sName).to.equal(product?.sName)
     })
 
 

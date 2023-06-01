@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "chai": "^4.3.7",
-    "chai-mongo-doc": "^0.2.0",
     "mocha": "^10.2.0"
   }
 }
