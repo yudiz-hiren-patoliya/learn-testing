@@ -53,7 +53,7 @@ describe('Product routes', () => {
             })
         })
 
-        it.only('should not found product while id not provide',(done)=> {
+        it('should not found product while id not provide',(done)=> {
            
             request(server)
             .get(`/api/v2/product/view/id`)
