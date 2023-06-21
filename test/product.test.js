@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const request = require('supertest')
 const expect = require('chai').expect
 const server = require('../index')
@@ -7,9 +8,13 @@ const store = {}
 
 describe('Product routes', () => {
     before(async ()=> {
-        const id = await ProductModel.find({}).lean()
-        store.id = id[0]?._id || '647880bbfa9437000b168cf1'
+        const id = await ProductModel.findOne({}).lean()
+        store.id = id?._id ?? '648021d7ed0969797cf75c5e'
         store.diffid = '63c63716599757cdbf8fabe6'
+    })
+
+    after(async ()=> {
+        await mongoose.disconnect().then(()=> console.log('Database Disconnected successfully')).catch((error)=> console.log('Error while Database disconnect :'+error))
     })
 
     describe('/POST add Product',()=> {
@@ -29,7 +34,7 @@ describe('Product routes', () => {
     })
 
     describe('/GET get one product',()=> {
-        it('should get product',(done)=> {
+        it.only('should get product',(done)=> {
             request(server)
             .get(`/api/v1/product/view/${store.id}`)
             .expect(200)
@@ -54,9 +59,8 @@ describe('Product routes', () => {
         })
 
         it('should not found product while id not provide',(done)=> {
-           
             request(server)
-            .get(`/api/v2/product/view/id`)
+            .get('/api/v2/product/view/id')
             .expect(404)
             .end(function(err,res){
                 if(err) done(err)
@@ -66,6 +70,4 @@ describe('Product routes', () => {
             })
         })
     })
-
-   
 })

@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:8000"
+  phases:
+    - name: list of products
+      duration: 60
+      arrivalRate: 30
+     
+scenarios:
+  - name: list of products
+    flow:
+    - get:
+        url: "/api/v1/product/list"
